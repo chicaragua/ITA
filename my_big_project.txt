@@ -3,3 +3,4 @@
 03. Works in the dev branch has been started
 04. Some changes in the process of developing
 05. Needed to add new faetures
+HOTFIX
