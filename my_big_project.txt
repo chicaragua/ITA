@@ -1,1 +1,2 @@
 01. My project is created
+02. The first steps
