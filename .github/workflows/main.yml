@@ -23,8 +23,6 @@ jobs:
       - name: List files in folder
         run : ls -ll
       
-      - name: show JSON
-        run : cat files.json
       
  #     - name: set matrix
  #      id  : set-matrix
