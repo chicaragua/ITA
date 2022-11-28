@@ -9,6 +9,9 @@ jobs:
         with:
           fetch-depth: 0  # OR "2" -> To retrieve the preceding commit.
 
+      - name: install jq
+        run: sudo apt update && sudo apt install -y jq
+
       # Example 1
       - name: Get changed files
         id: changed-files
@@ -20,4 +23,4 @@ jobs:
         run: ls -la
 
       - name: List all changed files
-        run: echo ${{ steps.changed-files.outputs.all_changed_files  }}
+        run: jq . ${{ steps.changed-files.outputs.all_changed_files  }}
