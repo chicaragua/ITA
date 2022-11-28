@@ -1,0 +1,44 @@
+[
+  {
+    "IP Address": "192.168.0.1",
+    "Score": "266",
+    "Total": "329",
+    "Vulns": "2:14:13:7:293",
+    "Agent ID": "",
+    "OS CPE": "cpe:/o:redhat:enterprise_linux:6::es",
+    "Repository": "Test Scan",
+    "Info": "293",
+    "Low": "5",
+    "Med.": "3",
+    "High": "4",
+    "Crit.": "2"
+  },
+  {
+    "IP Address": "192.168.0.2",
+    "Score": "127",
+    "Total": "221",
+    "Vulns": "2:1:12:1:205",
+    "Agent ID": "",
+    "OS CPE": "cpe:/o:Microsoft:Windows:7",
+    "Repository": "Test Scan",
+    "Info": "205",
+    "Low": "1",
+    "Med.": "12",
+    "High": "13",
+    "Crit.": "42"
+  },
+  {
+    "IP Address": "192.168.0.3",
+    "Score": "127",
+    "Total": "245",
+    "Vulns": "2:1:12:1:229",
+    "Agent ID": "",
+    "OS CPE": "cpe:/o:Microsoft:Windows:10",
+    "Repository": "Test Scan",
+    "Info": "229",
+    "Low": "1",
+    "Med.": "124",
+    "High": "12",
+    "Crit.": "32"
+  }
+]
