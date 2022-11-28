@@ -22,8 +22,15 @@ jobs:
       - name: List files in folder
         run : ls -ll
       
+      - name: show JSON
+        run : cat files.fson
+      
+      - name: set matrix
+        id  : set-matrix
+        run : echo ${{ steps.changed-files.outputs.all_changed_files  }}
+      
     outputs:
-      matrix-files: ${{ fromJson('files.json') }} 
+      matrix-files: ${{ steps.set-matrix.outputs.matrix-files }} 
 
 
 #  build:
