@@ -26,7 +26,7 @@ jobs:
         run: echo ${{ steps.changed-files.outputs.all_changed_files  }} >> 1.json
 
       - name: Show JSON from file
-        run: jq . 1.json
+        run: jq .[0] 1.json
 
-      - name: Show JSON from env
-        run: jq .[0] ${{ steps.changed-files.outputs.all_changed_files  }}
+#      - name: Show JSON from env
+#        run: jq .[0] ${{ steps.changed-files.outputs.all_changed_files  }}
