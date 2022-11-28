@@ -1,32 +1,49 @@
 name: changes
 on: [push]
 jobs:
-  build:
-    runs-on: ubuntu-latest  # windows-latest | macos-latest
-    name: Test changed-files
+  build-matrix:
+    runs-on: ubuntu-latest
+    name: Building matrix   
     steps:
-      - uses: actions/checkout@v3
+      - name: Clone repo
+        uses: actions/checkout@v3
         with:
-          fetch-depth: 0  # OR "2" -> To retrieve the preceding commit.
+          fetch-depth: 0
+      
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v34
+        with:
+          json: "true"
+      
+      - name: Make JSON
+        run: echo ${{ steps.changed-files.outputs.all_changed_files  }} >> files.json
+      
+    outputs:
+      matrix: ${{ fromJson(./files.json) }} 
 
-      - name: install jq
-        run: sudo apt update && sudo apt install -y jq
+
+#  build:
+#    runs-on: ubuntu-latest  # windows-latest | macos-latest
+#    name: 
+#    steps:
+#     - uses: actions/checkout@v3
+#        with:
+#          fetch-depth: 0  # OR "2" -> To retrieve the preceding commit.
 
       # Example 1
-      - name: Get changed files
-        id: files
-        uses: jitterbit/get-changed-files@v1
-        with:
-          format: 'json'
-          
-      - name: list files
-        run: ls -la
+#      - name: Get changed files
+#        id: changed-files
+#        uses: tj-actions/changed-files@v34
+#        with:
+#          json: "true"
+#      
+#      - name: list files
+#        run: ls -la
+#      - name: List all changed files
+#        run: echo ${{ steps.changed-files.outputs.all_changed_files  }} >> 1.json
+#
+#      - name: Show JSON from file
+#        run: cat 1.json
 
-      - name: List all changed files
-        run: echo ${{ steps.files.outputs.modified  }} >> 1.json
 
-      - name: Show JSON from file
-        run: cat 1.json
-
-#      - name: Show JSON from env
-#        run: jq .[0] ${{ steps.changed-files.outputs.all_changed_files  }}
