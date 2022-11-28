@@ -25,5 +25,8 @@ jobs:
       - name: List all changed files
         run: echo ${{ steps.changed-files.outputs.all_changed_files  }} >> 1.json
 
-      - name: show JSON
-        run: cat 1.json
+      - name: Show JSON from file
+        run: jq . 1.json
+
+      - name: Show JSON from env
+        run: jq . ${{ steps.changed-files.outputs.all_changed_files  }}
