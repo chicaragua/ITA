@@ -23,4 +23,4 @@ jobs:
         run: ls -la
 
       - name: List all changed files
-        run: jq . ${{ steps.changed-files.outputs.all_changed_files  }}
+        run: cat ${{ steps.changed-files.outputs.all_changed_files  }}
