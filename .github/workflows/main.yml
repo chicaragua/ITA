@@ -16,8 +16,9 @@ jobs:
         with:
           json: "true"
       
-      - name: Make JSON
-        run : echo ${{ steps.changed-files.outputs.all_changed_files  }} >> files.json
+      - name: Make matrix
+        id  : make-matrix
+        run : echo ${{ steps.changed-files.outputs.all_changed_files  }}
       
       - name: List files in folder
         run : ls -ll
@@ -25,12 +26,12 @@ jobs:
       - name: show JSON
         run : cat files.json
       
-      - name: set matrix
-        id  : set-matrix
-        run : echo "matrix-files=${{ steps.changed-files.outputs.all_changed_files }}"
+ #     - name: set matrix
+ #      id  : set-matrix
+ #       run : echo "matrix-files=${{ steps.changed-files.outputs.all_changed_files }}"
       
     outputs:
-      matrix-files: ${{ steps.set-matrix.outputs.matrix-files }} 
+      matrix-files: ${{ steps.make-matrix.outputs.matrix-files }} 
 
 
   build:
