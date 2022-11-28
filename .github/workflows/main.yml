@@ -18,7 +18,7 @@ jobs:
       
       - name: Make matrix
         id  : make-matrix
-        run : cat test.json
+        run : cat 04.GIT_actions/test.json
       
       - name: List files in folder
         run : ls -ll
