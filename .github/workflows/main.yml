@@ -1,5 +1,5 @@
 name: changes
-on: [pull_request]
+on: [push]
 jobs:
   build-matrix:
     runs-on: ubuntu-latest
@@ -22,6 +22,9 @@ jobs:
       
       - name: List files in folder
         run : ls -ll
+        
+      - name: List matrix
+        run: echo ${{ steps.make-matrix.outputs.matrix-files }} 
       
       
  #     - name: set matrix
