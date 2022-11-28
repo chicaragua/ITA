@@ -20,7 +20,4 @@ jobs:
         run: ls -la
 
       - name: List all changed files
-        run: |
-          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-            echo "$file was changed"
-          done
+        run: echo ${{ steps.changed-files.outputs.all_changed_files }}
