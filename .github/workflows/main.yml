@@ -27,33 +27,32 @@ jobs:
       
       - name: set matrix
         id  : set-matrix
-        run : echo ${{ steps.changed-files.outputs.all_changed_files  }}
+        run : echo "::set-output name=matrix-files::${{ steps.changed-files.outputs.all_changed_files }}"
       
     outputs:
       matrix-files: ${{ steps.set-matrix.outputs.matrix-files }} 
 
 
-#  build:
-#    runs-on: ubuntu-latest  # windows-latest | macos-latest
-#    name: 
-#    steps:
-#     - uses: actions/checkout@v3
-#        with:
-#          fetch-depth: 0  # OR "2" -> To retrieve the preceding commit.
-
+  build:
+    needs: build-matrix
+    runs-on: ubuntu-latest  # windows-latest | macos-latest
+    name: Test changed-files
+    strategy:
+      matrix: ${{ fromJSON(needs.build-matrix.outputs.matix-files) }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          
       # Example 1
-#      - name: Get changed files
-#        id: changed-files
-#        uses: tj-actions/changed-files@v34
-#        with:
-#          json: "true"
-#      
-#      - name: list files
-#        run: ls -la
-#      - name: List all changed files
-#        run: echo ${{ steps.changed-files.outputs.all_changed_files  }} >> 1.json
-#
-#      - name: Show JSON from file
-#        run: cat 1.json
+      
+      
+      - name: list files
+        run: ls -la
+      - name: List all changed files
+        run: echo ${{ steps.changed-files.outputs.all_changed_files  }} >> 1.json
+
+      - name: Show JSON from file
+        run: cat 1.json
 
 
