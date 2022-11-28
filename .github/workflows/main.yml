@@ -23,4 +23,7 @@ jobs:
         run: ls -la
 
       - name: List all changed files
-        run: jq . ${{ steps.changed-files.outputs.all_changed_files  }}
+        run: echo ${{ steps.changed-files.outputs.all_changed_files  }} >> 1.json
+
+      - name: show JSON
+        run: cat 1.json
