@@ -14,16 +14,16 @@ jobs:
 
       # Example 1
       - name: Get changed files
-        id: changed-files
-        uses: tj-actions/changed-files@v34
+        id: files
+        uses: jitterbit/get-changed-files@v1
         with:
-          json: "true"
+          format: 'json'
           
       - name: list files
         run: ls -la
 
       - name: List all changed files
-        run: echo ${{ steps.changed-files.outputs.all_changed_files  }} >> 1.json
+        run: echo ${{ steps.files.outputs.modified  }} >> 1.json
 
       - name: Show JSON from file
         run: jq .[0] 1.json
