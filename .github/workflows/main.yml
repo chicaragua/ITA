@@ -1,5 +1,5 @@
 name: changes
-on: [commit_comment]
+on: [push]
 jobs:
   changes:
     runs-on: ubuntu-latest
