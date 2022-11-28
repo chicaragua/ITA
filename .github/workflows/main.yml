@@ -17,7 +17,7 @@ jobs:
           json: "true"
           
       - name: list files
-        run: ls -la $HOME
+        run: ls -la
 
       - name: List all changed files
         run: |
