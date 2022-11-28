@@ -1,15 +1,21 @@
 name: changes
 on: [push]
 jobs:
-  changes:
-    runs-on: ubuntu-latest
+  build:
+    runs-on: ubuntu-latest  # windows-latest | macos-latest
+    name: Test changed-files
     steps:
-      - id: file_changes
-        uses: trilom/file-changes-action@v1.2.3
+      - uses: actions/checkout@v3
         with:
-          githubRepo: chicaragua/ITA
-      - name: test
+          fetch-depth: 0  # OR "2" -> To retrieve the preceding commit.
+
+      # Example 1
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v34
+
+      - name: List all changed files
         run: |
-          cat $HOME/files.json
-      - name: list files
-        run: ls -la
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            echo "$file was changed"
+          done
