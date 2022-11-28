@@ -23,7 +23,7 @@ jobs:
         run : ls -ll
       
     outputs:
-      matrix: ${{ fromJson('./files.json') }} 
+      matrix: ${{ fromJson('files.json') }} 
 
 
 #  build:
