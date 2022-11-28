@@ -23,7 +23,7 @@ jobs:
         run : ls -ll
       
       - name: show JSON
-        run : cat files.fson
+        run : cat files.json
       
       - name: set matrix
         id  : set-matrix
