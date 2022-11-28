@@ -15,6 +15,9 @@ jobs:
         uses: tj-actions/changed-files@v34
         with:
           json: "true"
+          
+      - name: list files
+        run: ls -la $HOME
 
       - name: List all changed files
         run: |
