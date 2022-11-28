@@ -50,7 +50,7 @@ jobs:
       - name: list files
         run: ls -la
       - name: List matrix
-        run: echo ${{ fromJSON(needs.build-matrix.outputs.matrix-files) }}
+        run: echo ${{ needs.build-matrix.outputs.matrix-files }}
 
       - name: Show JSON from file
         run: cat 1.json
