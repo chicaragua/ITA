@@ -27,7 +27,7 @@ jobs:
       
       - name: set matrix
         id  : set-matrix
-        run : echo "matrix-files=${{ steps.changed-files.outputs.all_changed_files }}"
+        run : matrix-files=${{ steps.changed-files.outputs.all_changed_files }}
       
     outputs:
       matrix-files: ${{ steps.set-matrix.outputs.matrix-files }} 
