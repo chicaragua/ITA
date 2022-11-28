@@ -20,4 +20,4 @@ jobs:
         run: ls -la
 
       - name: List all changed files
-        run: echo ${{ steps.changed-files.outputs }}
+        run: echo ${{ steps.changed-files.outputs.all_changed_files  }}
