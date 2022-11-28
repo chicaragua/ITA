@@ -37,8 +37,8 @@ jobs:
     needs: build-matrix
     runs-on: ubuntu-latest  # windows-latest | macos-latest
     name: Test changed-files
-    strategy:
-      matrix: ${{ fromJSON(needs.build-matrix.outputs.matrix-files) }}
+ #   strategy:
+#      matrix: ${{ fromJSON(needs.build-matrix.outputs.matrix-files) }}
     steps:
       - uses: actions/checkout@v3
         with:
@@ -49,8 +49,8 @@ jobs:
       
       - name: list files
         run: ls -la
-      - name: List all changed files
-        run: echo ${{ steps.changed-files.outputs.all_changed_files  }} >> 1.json
+      - name: List matrix
+        run: echo ${{ fromJSON(needs.build-matrix.outputs.matrix-files) }}
 
       - name: Show JSON from file
         run: cat 1.json
