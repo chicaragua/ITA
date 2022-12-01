@@ -3,7 +3,9 @@ on: [push]
 jobs:
   build-matrix:
     runs-on: ubuntu-latest
-    name: Building matrix   
+    name: Building matrix  
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
       - name: Clone repo
         uses: actions/checkout@v3
@@ -27,35 +29,28 @@ jobs:
         run: echo ${{ steps.make-matrix }} 
       
       
- #     - name: set matrix
- #      id  : set-matrix
- #       run : echo "matrix-files=${{ steps.changed-files.outputs.all_changed_files }}"
-      
-    outputs:
-      matrix-files: ${{ steps.make-matrix.outputs.matrix-files }} 
+      - name: set matrix
+        id  : set-matrix
+   #    run : echo "matrix-files=${{ steps.changed-files.outputs.all_changed_files }}"
+        run: echo "matrix={\"container\":${{ steps.changed-files.outputs.all_changed_files }}}" >> "$GITHUB_OUTPUT"
+
 
 
   build:
     needs: build-matrix
     runs-on: ubuntu-latest  # windows-latest | macos-latest
     name: Test changed-files
- #   strategy:
-#      matrix: ${{ fromJSON(needs.build-matrix.outputs.matrix-files) }}
+    strategy:
+        matrix: ${{ fromJSON(needs.build-matrix.outputs.matrix) }}
     steps:
       - name: Clone repo
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
+      - name: Test
+        run: |
+          echo ${{ matrix.container }}
           
-      # Example 1
-      
-      
-      - name: list files
-        run: ls -la
-      - name: List matrix
-        run: echo "${{ needs.build-matrix.outputs.matrix-files }}"
-
-      - name: Show JSON from file
-        run: cat 1.json
+  
 
 
