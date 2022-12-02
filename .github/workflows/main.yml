@@ -53,6 +53,6 @@ jobs:
         id  : set-env
         run: |
           COUNTER=$(cat ${{ matrix.container }} | tr -dc \\t | wc -c)
-          FILENAME=$(sed 's|.*/||' ${{ matrix.container }}) 
+          FILENAME=$(sed 's!.*/!!' ${{ matrix.container }}) 
           echo "In file $FILENAME is $COUNTER tabs"   
       
