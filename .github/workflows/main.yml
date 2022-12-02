@@ -53,6 +53,7 @@ jobs:
           COUNTER=$(cat ${{ matrix.container }} | tr -dc \\t | wc -c)          
           FILENAME=$(echo  ${{ matrix.container }} | sed 's|.*/||') 
           echo "In the file $FILENAME is $COUNTER tabs" >> $FILENAME.log
+          echo "In the file $FILENAME is $COUNTER tabs"
       - name: Show files
         run: ls -ll
       - name: Upload logs
