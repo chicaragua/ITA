@@ -49,6 +49,6 @@ jobs:
           fetch-depth: 0
       - name: Test
         env:
-          PATH: cat ${{ matrix.container }}
-          COUNTER: cat $PATH | tr -dc \\t | wc -c
+          PATH: ${{ matrix.container }}
+          COUNTER: cat ${{ matrix.container }} | tr -dc \\t | wc -c
         run: echo "In file $PATH is $COUNTER tabs"
