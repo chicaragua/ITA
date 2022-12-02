@@ -1,7 +1,5 @@
 name: changes
 on: [push]
-env:
-  COUNTER: 0
 jobs:
   build-matrix:
     runs-on: ubuntu-latest
@@ -33,19 +31,12 @@ jobs:
       
       - name: set matrix
         id  : set-matrix
-   #    run : echo "matrix-files=${{ steps.changed-files.outputs.all_changed_files }}"
         run : echo "array={\"container\":${{ steps.changed-files.outputs.all_changed_files }}}" >> "$GITHUB_OUTPUT"
-      - name: Add env
-        run : echo 2 >> ${{ env.COUNTER }}
-      - name: Show var
-        run: echo ${{ env.COUNTER }}
-        
-
-
+  
 
   build:
     needs  : build-matrix
-    runs-on: ubuntu-latest  # windows-latest | macos-latest
+    runs-on: ubuntu-latest 
     name   : Test changed-files
 
     strategy:
@@ -61,13 +52,10 @@ jobs:
         run: |
           COUNTER=$(cat ${{ matrix.container }} | tr -dc \\t | wc -c)          
           FILENAME=$(echo  ${{ matrix.container }} | sed 's|.*/||') 
-          echo "In file $FILENAME is $COUNTER tabs"
-          echo ${{ env.COUNTER }}
+          echo "In the file $FILENAME is $COUNTER tabs" >> $FILENAME.log
+      - name: Upload logs
+        uses: actions/upload-artifact@v2
+        with:
+          path: $FILENAME.log
 
-  global:
-    needs: build
-    runs-on: ubuntu-latest
-    name: Global count
-    steps:
-      - name: Show global 
-        run: echo ${{ env.COUNTER }}
+
