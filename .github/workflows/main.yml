@@ -47,12 +47,14 @@ jobs:
         with:
           fetch-depth: 0
       
-      - name: Set env
+      - name: Files check
         id  : set-env
         run: |
           COUNTER=$(cat ${{ matrix.container }} | tr -dc \\t | wc -c)          
           FILENAME=$(echo  ${{ matrix.container }} | sed 's|.*/||') 
           echo "In the file $FILENAME is $COUNTER tabs" >> $FILENAME.log
+      - name: Show files
+        run: ls -ll
       - name: Upload logs
         uses: actions/upload-artifact@v2
         with:
