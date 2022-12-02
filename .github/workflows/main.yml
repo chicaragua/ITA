@@ -40,9 +40,7 @@ jobs:
     needs: build-matrix
     runs-on: ubuntu-latest  # windows-latest | macos-latest
     name: Test changed-files
-    env:
-      PATH: ${{ matrix.container }}
-      COUNTER: ${{ steps.set-env }}
+
     strategy:
         matrix: ${{ fromJSON(needs.build-matrix.outputs.matrix) }}
     steps:
@@ -53,13 +51,7 @@ jobs:
       
       - name: Set env
         id  : set-env
-#        env:
-#          PATH: ${{ matrix.container }}
-#          COUNTER: cat ${{ matrix.container }} | tr -dc \\t | wc -c
-        run: cat ${{ matrix.container }} | tr -dc \\t | wc -c
-        
-      - name: print env
-        run : | 
-          cat ${{ env.PATH  }}
-          cat ${{ env.COUNTER )}}      
+        run: |
+          cat ${{ matrix.container }} | tr -dc \\t | wc -c >> $COUNTER
+          echo "In file ${{ matrix.container }} is $COUNTER tabs"   
       
