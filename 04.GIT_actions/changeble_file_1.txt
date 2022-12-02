@@ -1,4 +1,5 @@
 This file will changhe
+<<<<<<< HEAD
 	01
 	02
 03
@@ -6,3 +7,7 @@ This file will changhe
 	05
 	06
 	07
+=======
+01.
+02.
+>>>>>>> 6b79e50b4f9ed4ad2f07dcc5de979f0e8efee381
