@@ -68,4 +68,4 @@ jobs:
     name: Global count
     steps:
       - name: Show global 
-        run : echo ${{ env.GLOBAL_COUNTER }}
+        run: echo ${{ env.COUNTER}}
