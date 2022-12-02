@@ -67,5 +67,5 @@ jobs:
     runs-on: ubuntu-latest
     name: Global count
     steps:
-      -name: Show global 
-       run : echo ${{ env.GLOBAL_COUNTER }}
+      - name: Show global 
+        run : echo ${{ env.GLOBAL_COUNTER }}
