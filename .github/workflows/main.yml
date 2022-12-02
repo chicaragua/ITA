@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Building matrix  
     outputs:
-      matrix: ${{ steps.set-matrix.outputs.matrix }}
+      matrix: ${{ steps.set-matrix.outputs.array }}
     steps:
       - name: Clone repo
         uses: actions/checkout@v3
@@ -32,7 +32,7 @@ jobs:
       - name: set matrix
         id  : set-matrix
    #    run : echo "matrix-files=${{ steps.changed-files.outputs.all_changed_files }}"
-        run: echo "matrix={\"container\":${{ steps.changed-files.outputs.all_changed_files }}}" >> "$GITHUB_OUTPUT"
+        run: echo "array={\"container\":${{ steps.changed-files.outputs.all_changed_files }}}" >> "$GITHUB_OUTPUT"
 
 
 
