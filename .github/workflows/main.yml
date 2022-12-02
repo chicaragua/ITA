@@ -48,4 +48,4 @@ jobs:
         with:
           fetch-depth: 0
       - name: Test
-        run: echo "In the file ${{ matrix.container }} is `cat ${{ matrix.container }} | tr -dc \t | wc -c`"
+        run: echo "In the file ${{ matrix.container }} is `cat ${{ matrix.container }} | grep -P \"\t\" * | wc -l`"
