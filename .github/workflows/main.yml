@@ -52,6 +52,6 @@ jobs:
       - name: Set env
         id  : set-env
         run: |
-          cat ${{ matrix.container }} | tr -dc \\t | wc -c >> "$COUNTER"
+          COUNTER=$(cat ${{ matrix.container }} | tr -dc \\t | wc -c)
           echo "In file ${{ matrix.container }} is $COUNTER tabs"   
       
