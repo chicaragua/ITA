@@ -37,7 +37,7 @@ jobs:
       - name: Add env
         run : echo "COUNTER=1" >> $GITHUB_ENV
       - name: Show var
-        run: echo ${{ env.COUNTER}}
+        run: echo ${{ env.COUNTER }}
         
 
 
@@ -61,6 +61,7 @@ jobs:
           COUNTER=$(cat ${{ matrix.container }} | tr -dc \\t | wc -c)          
           FILENAME=$(echo  ${{ matrix.container }} | sed 's|.*/||') 
           echo "In file $FILENAME is $COUNTER tabs"
+          echo ${{ env.COUNTER }}
 
   global:
     needs: build
@@ -68,4 +69,4 @@ jobs:
     name: Global count
     steps:
       - name: Show global 
-        run: echo ${{ env.COUNTER}}
+        run: echo ${{ env.COUNTER }}
