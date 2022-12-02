@@ -51,7 +51,7 @@ jobs:
         id  : set-env
         run: |
           COUNTER=$(cat ${{ matrix.container }} | tr -dc \\t | wc -c)      
-          echo "FILENAME=$(echo  ${{ matrix.container }} | sed 's|.*/||')
+          FILENAME=$(echo  ${{ matrix.container }} | sed 's|.*/||')
           echo "In the file ${{ env.FILENAME }} is ${{ env.COUNTER }} tabs" >> $FILENAME.log
           echo "filename=$FILENAME"
           echo "filename=$FILENAME" >> $GITHUB_ENV
