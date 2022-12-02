@@ -48,9 +48,4 @@ jobs:
         with:
           fetch-depth: 0
       - name: Test
-        run: |
-          echo ${{ matrix.container }}
-          
-  
-
-
+        run: cat ${{ matrix.container }} | tr -dc \\t | wc -c
