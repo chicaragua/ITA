@@ -52,7 +52,7 @@ jobs:
         run: |
           COUNTER=$(cat ${{ matrix.container }} | tr -dc \\t | wc -c)      
           FILENAME=$(echo  ${{ matrix.container }} | sed 's|.*/||')
-          echo "In the file ${{ env.FILENAME }} is ${{ env.COUNTER }} tabs" >> $FILENAME.log
+          echo "In the file $FILENAME is $COUNTER tabs" >> $FILENAME.log
           echo "filename=$FILENAME"
           echo "filename=$FILENAME" >> $GITHUB_ENV
       - name: Show filensme
