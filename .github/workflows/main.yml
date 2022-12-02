@@ -1,7 +1,7 @@
 name: changes
 on: [push]
 env:
-  GLOBAL_COUNTER: 0
+  GLOBAL_COUNTER: 1+1
 jobs:
   build-matrix:
     runs-on: ubuntu-latest
@@ -61,7 +61,7 @@ jobs:
           FILENAME=$(echo  ${{ matrix.container }} | sed 's|.*/||') 
           echo "In file $FILENAME is $COUNTER tabs"
       - name: Show global
-        run : ${{ env.GLOBAL_COUNTER }}
+        run : echo ${{ env.GLOBAL_COUNTER }}
 
   global:
     needs: build
