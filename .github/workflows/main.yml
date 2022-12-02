@@ -36,7 +36,7 @@ jobs:
    #    run : echo "matrix-files=${{ steps.changed-files.outputs.all_changed_files }}"
         run : echo "array={\"container\":${{ steps.changed-files.outputs.all_changed_files }}}" >> "$GITHUB_OUTPUT"
       - name: Add env
-        run : echo "COUNTER=1" >> $GITHUB_ENV
+        run : echo ${{ env.COUNTER }}=2
       - name: Show var
         run: echo ${{ env.COUNTER }}
         
