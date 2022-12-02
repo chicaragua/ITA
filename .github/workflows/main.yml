@@ -50,15 +50,15 @@ jobs:
       - name: Files check
         id  : set-env
         run: |
-          COUNTER=$(cat ${{ matrix.container }} | tr -dc \\t | wc -c)          
-          FILENAME=$(echo  ${{ matrix.container }} | sed 's|.*/||') 
-          echo "In the file $FILENAME is $COUNTER tabs" >> $FILENAME.log
+          echo "COUNTER=$(cat ${{ matrix.container }} | tr -dc \\t | wc -c)" >> GITHUB_ENV          
+          echo "FILENAME=$(echo  ${{ matrix.container }} | sed 's|.*/||')" >> GITHUB_ENV 
+          echo "In the file ${{ env.FILENAME }} is {{ env.$COUNTER }} tabs" >> ${{ env.FILENAME }}.log
           echo "In the file $FILENAME is $COUNTER tabs"
       - name: Show files
         run: cat $FILENAME.log
       - name: Upload logs
         uses: actions/upload-artifact@v2
         with:
-          path: ./$FILENAME.log
+          path: ${{ env.FILENAME }}.log
 
 
