@@ -1,7 +1,6 @@
 name: changes
 on: [push]
-env:
-  GLOBAL_COUNTER: 1+1
+
 jobs:
   build-matrix:
     runs-on: ubuntu-latest
@@ -35,8 +34,10 @@ jobs:
         id  : set-matrix
    #    run : echo "matrix-files=${{ steps.changed-files.outputs.all_changed_files }}"
         run : echo "array={\"container\":${{ steps.changed-files.outputs.all_changed_files }}}" >> "$GITHUB_OUTPUT"
-      - name: Add global
-        run : ${{ env.GLOBAL_COUNTER=1}}
+      - name: Add env
+        run : echo "COUNTER=1" >> $GITHUB_ENV
+      - name: Show var
+        run: echo ${{ env.COUNTER}}
         
 
 
@@ -60,8 +61,6 @@ jobs:
           COUNTER=$(cat ${{ matrix.container }} | tr -dc \\t | wc -c)          
           FILENAME=$(echo  ${{ matrix.container }} | sed 's|.*/||') 
           echo "In file $FILENAME is $COUNTER tabs"
-      - name: Show global
-        run : echo ${{ env.GLOBAL_COUNTER }}
 
   global:
     needs: build
