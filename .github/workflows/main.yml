@@ -1,6 +1,7 @@
 name: changes
 on: [push]
-
+env:
+  COUNTER: 0
 jobs:
   build-matrix:
     runs-on: ubuntu-latest
