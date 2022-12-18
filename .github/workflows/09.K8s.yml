@@ -1,0 +1,106 @@
+name: CI
+on:
+  - push
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    name: Munikube install
+    steps:
+    
+    - name: start time
+      id: start_time
+      run: echo "start=$(date +%s)" >> "$GITHUB_OUTPUT"
+     
+    - name: start minikube
+      id: minikube
+      uses: medyagh/setup-minikube@latest
+      
+    - name: stop time
+      id: stop_time
+      run: echo "stop=$(date +%s)" >> "$GITHUB_OUTPUT"
+      
+    - name: calculate result
+      id: result_calc
+      run: |
+         echo '#!/bin/bash
+         RESULT=$((${{ steps.stop_time.outputs.stop }} - ${{ steps.start_time.outputs.start }}))
+         echo $RESULT' > result.sh
+         echo "result=$(bash result.sh)" >> result.log
+         
+    - name: result
+      id: result
+      run: echo "result=$(bash result.sh)" >> "$GITHUB_OUTPUT"
+      
+    - name: show time
+      run: echo ${{ steps.result.outputs.result }}
+      
+    - name: report
+      run: |
+        echo '#!/bin/bash
+        
+        echo "REPORT Munikube install job:
+        
+        $(kubectl version --short)
+        
+        List nodes:
+        $(kubectl get ns)
+        
+        Count nodes:
+        $(kubectl get ns | sed '/NAME/d' | wc -l)
+                
+        Usage time (sec): ${{ steps.result.outputs.result}}"' > report.sh
+        
+        bash report.sh > report.log
+        
+        cat report.log
+  job2:
+    runs-on: ubuntu-latest
+    name: Kind install
+    steps:
+    
+    - name: start time
+      id: start_time
+      run: echo "start=$(date +%s)" >> "$GITHUB_OUTPUT"
+   
+    - name: Create k8s Kind Cluster
+      uses: helm/kind-action@v1.4.0
+      
+    - name: stop time
+      id: stop_time
+      run: echo "stop=$(date +%s)" >> "$GITHUB_OUTPUT"
+      
+    - name: calculate result
+      id: result_calc
+      run: |
+         echo '#!/bin/bash
+         RESULT=$((${{ steps.stop_time.outputs.stop }} - ${{ steps.start_time.outputs.start }}))
+         echo $RESULT' > result.sh
+         echo "result=$(bash result.sh)" >> result.log
+         
+    - name: result
+      id: result
+      run: echo "result=$(bash result.sh)" >> "$GITHUB_OUTPUT"
+      
+    - name: show time
+      run: echo ${{ steps.result.outputs.result }}
+      
+    - name: report
+      run: |
+        echo '#!/bin/bash
+        
+        echo "REPORT Kind install job:
+        
+        $(kubectl version --short)
+        
+        List nodes:
+        $(kubectl get ns)
+        
+        Count nodes:
+        $(kubectl get ns | sed '/NAME/d' | wc -l)
+                
+        Usage time (sec): ${{ steps.result.outputs.result}}"' > report.sh
+        
+        bash report.sh > report.log
+        
+        cat report.log
+                  
