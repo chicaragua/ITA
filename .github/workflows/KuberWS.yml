@@ -12,7 +12,7 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install sshuttle
-        snap install kubectl --classic
+        sudo snap install kubectl --classic
 
         
     - name: Connect via SSH
