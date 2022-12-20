@@ -1,4 +1,25 @@
-name: PODs monitoring
+name: PODs check
+on:
+  - push
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    name: Checks
+    steps:
+    
+    - name: install packages
+      id: install
+      run: |
+        sudo apt-get update
+        sudo apt-get install sshuttle
+        snap install kubectl --classic
 
-#on: [push]
+        
+    - name: Connect via SSH
+      id: ssh_connect
+      run: sshuttle -r 'jump_sa':'$F|BoF4+JK'@178.124.206.53 192.168.0.0/16 &
 
+    - name: Chacking
+      id: checking
+      run: kubectl get pods
+        
