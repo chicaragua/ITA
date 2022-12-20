@@ -17,7 +17,9 @@ jobs:
         
     - name: Connect via SSH
       id: ssh_connect
-      run: sudo sshuttle -r 'jump_sa':'$F|BoF4+JK'@178.124.206.53 192.168.0.0/16 &
+      run: ping -c 4 178.124.206.53
+
+#      run: sudo sshuttle -r 'jump_sa':'$F|BoF4+JK'@178.124.206.53 192.168.0.0/16 &
 
     - name: Chacking
       id: checking
