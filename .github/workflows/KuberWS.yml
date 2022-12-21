@@ -80,3 +80,9 @@ jobs:
         SLACK_TITLE: ALARM
         SLACK_USERNAME: rtCamp
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        
+    - name: Upload logs
+      if: ${{ steps.checking.outputs.count_failed_pods > 0 }}
+      uses: actions/upload-artifact@v3
+      with:
+         path: ${{ error_file }}
