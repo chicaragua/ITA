@@ -29,7 +29,7 @@ jobs:
     - name: Making dir for config
       run: |
         sudo mkdir ~/.kube
-        cp 10.Kubernetes.WS/config ~/.kube
+        sudo cp 10.Kubernetes.WS/config ~/.kube
 
     - name: Checking
       id: checking
