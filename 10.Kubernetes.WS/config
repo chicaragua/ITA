@@ -1,0 +1,19 @@
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUJkakNDQVIyZ0F3SUJBZ0lCQURBS0JnZ3Foa2pPUFFRREFqQWpNU0V3SHdZRFZRUUREQmhyTTNNdGMyVnkKZG1WeUxXTmhRREUyTnpBNE5qZzRNakF3SGhjTk1qSXhNakV5TVRneE16UXdXaGNOTXpJeE1qQTVNVGd>
+    server: https://127.0.0.1:6443
+  name: default
+contexts:
+- context:
+    cluster: default
+    user: default
+  name: default
+current-context: default
+kind: Config
+preferences: {}
+users:
+- name: default
+  user:
+    client-certificate-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUJrVENDQVRlZ0F3SUJBZ0lJZVJBMnJyL0JtZnN3Q2dZSUtvWkl6ajBFQXdJd0l6RWhNQjhHQTFVRUF3d1kKYXpOekxXTnNhV1Z1ZEMxallVQXhOamN3T0RZNE9ESXdNQjRYRFRJeU1USXhNakU0TVRNME1Gb1hEVEl6TV>
+    client-key-data: LS0tLS1CRUdJTiBFQyBQUklWQVRFIEtFWS0tLS0tCk1IY0NBUUVFSUV5YndIb1M2WFVBZkcwMU1ZL0l0L0FTc1FGL0VzZGh1ZzhrS0Z6SVpsMVRvQW9HQ0NxR1NNNDkKQXdFSG9VUURRZ0FFZ3p0Sytwb3Q0T0pFaks0T1BGMHorcG51dUFJdmhEd04zV3lWdStXZzJNVXJCWFZ1SStWWQ>
