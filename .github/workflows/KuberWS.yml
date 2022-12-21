@@ -26,19 +26,21 @@ jobs:
       with:
         fetch-depth: 0
         
-    - name: Making dir for config
+    - name: Del old config
       continue-on-error: true
       run: |
         sudo rm -R ~/.kube
         sudo rm pods.err
+        
+    - name: Making dir for config
+      continue-on-error: true
+      run: |
         sudo mkdir ~/.kube
         echo 'WARNING!!!
         Check pods:' >> pods.err
         
         
     - name: Copy config
-      if: always()
-      continue-on-error: true
       run: |
         sudo cp 10.Kubernetes.WS/config ~/.kube
         
