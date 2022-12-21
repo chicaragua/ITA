@@ -41,11 +41,11 @@ jobs:
         
     - name: Checking
       id: checking
-      run: echo "count_failed_pods=$(kubectl get pods | sed '/NAME/d' | sed '/Running/d')" >> "GITHUB_OUTPUT"
+      run: echo "count_failed_pods=$(kubectl get pods -A | sed '/NAME/d' | sed '/Running/d')" >> "GITHUB_OUTPUT"
  
     - name: Get failed pods
       id: get_failed_pods
       if: steps.checking.outputs.count_failed_pods > 0
       run: |
-        kubectl get pods | sed '/Running/d' > pods.err
+        kubectl get pods -A | sed '/Running/d' > pods.err
         cat pods.err
