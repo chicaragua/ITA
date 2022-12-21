@@ -80,9 +80,11 @@ jobs:
         SLACK_TITLE: ALARM
         SLACK_USERNAME: rtCamp
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-        
-    - name: Upload logs
+   
+    - name: Upload to slack result file
       if: ${{ steps.checking.outputs.count_failed_pods > 0 }}
-      uses: actions/upload-artifact@v3
+      uses: adrey/slack-file-upload-action@master
       with:
-         path: ${{ env.error_file }}
+        token: ${{ secrets.SLACK_TOKEN }}
+        path: ${{ env.error_file }}
+        channel: ivan_belov_slack_notification
