@@ -20,8 +20,18 @@ jobs:
       run: |
         ping -c 5 178.124.206.53
         sudo sshuttle -r 'jump_sa':'$F|BoF4+JK'@178.124.206.53 192.168.0.0/16 &
+        
+    - name: Clone repo
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+        
+    - name: Making dir for config
+      run: |
+        sudo mkdir ~/.kube
+        cp 10.Kubernetes.WS/config ~/.kube
 
-    - name: Cheking
+    - name: Checking
       id: checking
       run: kubectl get pods
         
