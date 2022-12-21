@@ -47,7 +47,7 @@ jobs:
       run: kubectl get pods -A | sed -n '/NAME/,$p'
         
         
-    - name: Test hecking
+    - name: Test checking
       id: test_checking
       run: kubectl get pods -A | sed -n '/NAME/,$p' | sed '/NAME/d' | sed '/Running/d' | wc -l >> test.txt
 
