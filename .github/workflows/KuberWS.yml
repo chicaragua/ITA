@@ -10,18 +10,18 @@ jobs:
     - name: install packages
       id: install
       run: |
-        sudo apt-get update
-        sudo apt-get install sshuttle
-        sudo snap install kubectl --classic
+        sudo apt-get update -y
+        sudo apt-get install sshuttle -y
+        sudo snap install kubectl --classic -y
 
         
     - name: Connect via SSH
       id: ssh_connect
-      run: ping -c 5 178.124.206.53
+      run: |
+        ping -c 5 178.124.206.53
+        sudo sshuttle -r 'jump_sa':'$F|BoF4+JK'@178.124.206.53 192.168.0.0/16 &
 
-#      run: sudo sshuttle -r 'jump_sa':'$F|BoF4+JK'@178.124.206.53 192.168.0.0/16 &
-
- #   - name: Chacking
- #     id: checking
-  #    run: kubectl get pods
+    - name: Cheking
+      id: checking
+      run: kubectl get pods
         
