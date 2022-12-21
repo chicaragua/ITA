@@ -18,11 +18,7 @@ jobs:
     - name: Connect via SSH
       id: ssh_connect
       run: |
-<<<<<<< HEAD
-        ping -c 3 178.124.206.53
-=======
         ping -c 4 178.124.206.53
->>>>>>> c53dc9629d6c7fc0ade4f7b29f9e75390fd132ac
         ssh -o ProxyCommand="ssh -W %h:%p -q jump_sa@178.124.206.53" -L 6443:127.0.0.1:6443 root@192.168.203.2 -f -N
         
     - name: Clone repo
