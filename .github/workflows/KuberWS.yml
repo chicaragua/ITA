@@ -37,6 +37,7 @@ jobs:
         sudo cp 10.Kubernetes.WS/config ~/.kube
         
     - name: Checking
+      if: always()
       id: checking
       run: kubectl get pods
         
