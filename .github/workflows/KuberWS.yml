@@ -18,7 +18,11 @@ jobs:
     - name: Connect via SSH
       id: ssh_connect
       run: |
+<<<<<<< HEAD
         ping -c 3 178.124.206.53
+=======
+        ping -c 4 178.124.206.53
+>>>>>>> c53dc9629d6c7fc0ade4f7b29f9e75390fd132ac
         ssh -o ProxyCommand="ssh -W %h:%p -q jump_sa@178.124.206.53" -L 6443:127.0.0.1:6443 root@192.168.203.2 -f -N
         
     - name: Clone repo
@@ -41,11 +45,11 @@ jobs:
         
     - name: Checking
       id: checking
-      run: echo "count_failed_pods=$(kubectl get pods | sed '/NAME/d' | sed '/Running/d')" >> "GITHUB_OUTPUT"
+      run: echo "count_failed_pods=$(kubectl get pods -A | sed '/NAME/d' | sed '/Running/d')" >> "GITHUB_OUTPUT"
  
     - name: Get failed pods
       id: get_failed_pods
       if: steps.checking.outputs.count_failed_pods > 0
       run: |
-        kubectl get pods | sed '/Running/d' > pods.err
+        kubectl get pods -A | sed '/Running/d' > pods.err
         cat pods.err
