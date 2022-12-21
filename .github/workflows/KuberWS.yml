@@ -3,7 +3,7 @@ on:
   - push
 jobs:
   checks:
-    runs-on: ubuntu-latest
+    runs-on: vm3
     name: Checks
     steps:
     
