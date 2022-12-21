@@ -45,10 +45,14 @@ jobs:
         
     - name: Checking
       id: checking
-      run: echo "count_failed_pods=$(kubectl get pods -A | sed -n '/NAME/,$p' | sed '/NAME/d' | sed '/Running/d' | wc -l)" >> "GITHUB_OUTPUT"
+      run: kubectl get pods -A | sed -n '/NAME/,$p' | sed '/NAME/d' | sed '/Running/d' | wc -l >> test.txt
+#      run: echo "count_failed_pods=$(kubectl get pods -A | sed -n '/NAME/,$p' | sed '/NAME/d' | sed '/Running/d' | wc -l)" >> "GITHUB_OUTPUT
+
+    - name: Check file
+      run: cat test.txt
       
-    - name: Check var
-      run: echo ${{ steps.checking.outputs.count_failed_pods }}
+#    - name: Check var
+#      run: echo ${{ steps.checking.outputs.count_failed_pods }}
  
     - name: Get failed pods
       id: get_failed_pods
