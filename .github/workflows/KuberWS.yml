@@ -6,7 +6,7 @@ jobs:
     runs-on: vm3
     name: Checks
     env:
-      error_log: error.log
+      error_file: error.log
     steps:
     
     - name: install packages
@@ -39,7 +39,7 @@ jobs:
       run: |
         sudo mkdir ~/.kube
         echo 'WARNING!!!
-        Check pods:' >> ${{ env.error.log }}
+        Check pods:' >> ${{ env.error_file }}
         
         
     - name: Copy config
@@ -66,7 +66,7 @@ jobs:
       id: get_failed_pods
       if: ${{ steps.checking.outputs.count_failed_pods > 0 }}
       run: |
-        kubectl get pods -A | sed '/Running/d' >> ${{ env.error.log }}
+        kubectl get pods -A | sed '/Running/d' >> ${{ env.error_file }}
         cat pods.err
 
     - name: Slack OK notification
