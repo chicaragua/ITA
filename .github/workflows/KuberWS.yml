@@ -67,7 +67,7 @@ jobs:
       if: ${{ steps.checking.outputs.count_failed_pods > 0 }}
       run: |
         kubectl get pods -A | sed '/Running/d' >> ${{ env.error_file }}
-        cat pods.err
+      
 
     - name: Slack OK notification
       uses: rtCamp/action-slack-notify@v2
