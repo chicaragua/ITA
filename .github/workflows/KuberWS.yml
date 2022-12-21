@@ -10,9 +10,9 @@ jobs:
     - name: install packages
       id: install
       run: |
-        sudo apt-get update -y
-        sudo apt-get install -y sshuttle
-        sudo snap install -y kubectl --classic
+        sudo apt-get -y update
+        sudo apt-get -y install sshuttle
+        sudo snap install kubectl --classic
 
         
     - name: Connect via SSH
