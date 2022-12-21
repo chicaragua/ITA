@@ -73,6 +73,6 @@ jobs:
         SLACK_COLOR: 'red'
         SLACK_ICON: https://github.com/rtCamp.png?size=48
         SLACK_MESSAGE: '$(cat pods.err)'
-        SLACK_TITLE: Post Title
+        SLACK_TITLE: ALARM
         SLACK_USERNAME: rtCamp
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
