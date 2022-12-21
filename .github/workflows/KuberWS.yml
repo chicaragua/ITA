@@ -40,7 +40,7 @@ jobs:
         
     - name: Checking_debug
       id: checking_debug
-      run: kubectl get pods -A | sed -n '/NAME/,xp'
+      run: kubectl get pods -A | sed -n '/NAME/,$p'
         
         
     - name: Checking
