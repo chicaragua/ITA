@@ -19,7 +19,7 @@ jobs:
       id: ssh_connect
       run: |
         ping -c 5 178.124.206.53
-        sudo sshuttle -r 'jump_sa':'$F|BoF4+JK'@178.124.206.53 192.168.0.0/16 &
+        ssh -o ProxyCommand="ssh -W %h:%p -q jump_sa@178.124.206.53" -L 6443:127.0.0.1:6443 root@192.168.203.2 -f -N
         
     - name: Clone repo
       uses: actions/checkout@v3
