@@ -27,17 +27,25 @@ jobs:
         fetch-depth: 0
         
     - name: Making dir for config
+      continue-on-error: true
       run: |
         sudo mkdir ~/.kube
         
         
     - name: Copy config
       if: always()
+      continue-on-error: true
       run: |
         sudo cp 10.Kubernetes.WS/config ~/.kube
         
-    - name: Checking
-      if: always()
-      id: checking
-      run: kubectl get pods
         
+    - name: Checking
+      id: checking
+      run: echo "count_failed_pods=$(kubectl get pods | sed '/NAME/d' | sed '/Running/d')" >> "GITHUB_OUTPUT"
+ 
+    - name: Get failed pods
+      id: get_failed_pods
+      if: steps.checking.outputs.count_failed_pods > 0
+      run: |
+        kubectl get pods | sed '/Running/d' > pods.err
+        cat pods.err
