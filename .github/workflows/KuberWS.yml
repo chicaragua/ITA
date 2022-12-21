@@ -29,8 +29,13 @@ jobs:
     - name: Making dir for config
       run: |
         sudo mkdir ~/.kube
+        
+        
+    - name: Copy config
+      if: always()
+      run: |
         sudo cp 10.Kubernetes.WS/config ~/.kube
-
+        
     - name: Checking
       id: checking
       run: kubectl get pods
