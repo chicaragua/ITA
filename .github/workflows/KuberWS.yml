@@ -39,37 +39,23 @@ jobs:
       run: |
         sudo mkdir ~/.kube
         echo 'WARNING!!!
-        Check pods:' >> ${{ env.error_file }}
-        
+        Check pods:' >> ${{ env.error_file }}        
         
     - name: Copy config
       run: |
         sudo cp 10.Kubernetes.WS/config ~/.kube
         
-    - name: Checking_debug
-      id: checking_debug
-      run: kubectl get pods -A | sed -n '/NAME/,$p'
-        
-        
-    - name: Test checking
-      id: test_checking
-      run: kubectl get pods -A | sed -n '/NAME/,$p' | sed '/NAME/d' | sed '/Running/d' | wc -l >> test.txt
-
     - name: Checking
       id: checking
       run: echo "count_failed_pods=$(kubectl get pods -A | sed -n '/NAME/,$p' | sed '/NAME/d' | sed '/Running/d' | wc -l)" >> "$GITHUB_OUTPUT"
-
-    - name: Check var
-      run: echo ${{ steps.checking.outputs.count_failed_pods }}
  
     - name: Get failed pods
       id: get_failed_pods
       if: ${{ steps.checking.outputs.count_failed_pods > 0 }}
       run: |
-        kubectl get pods -A | sed '/Running/d' >> ${{ env.error_file }}
-      
+        kubectl get pods -A | sed '/Running/d' >> ${{ env.error_file }}      
 
-    - name: Slack OK notification
+    - name: Slack notification
       uses: rtCamp/action-slack-notify@v2
       if: ${{ steps.checking.outputs.count_failed_pods > 0 }}
       env:
