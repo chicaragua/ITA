@@ -1,0 +1,66 @@
+#      containers:
+#      - name: bash
+#        image: bash
+#        command: ["/scripts/test.sh"]
+#        volumeMounts:
+#        - name: test
+#          mountPath: /scripts
+#      volumes:
+#      - name: test
+#        configMap:
+#          test.sh: echo "HELLO"
+
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: test
+    
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: test  
+  name: test-configmap
+data:
+  test.sh: echo "HELLO"
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-deploy
+  namespace: test
+  labels:
+    role: blog
+spec:
+  selector:
+    matchLabels:
+      role: blog
+  replicas: 1 # tells deployment to run 2 pods matching the template
+  template:
+    metadata:
+      labels:
+        role: blog
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.22.1
+        args:
+          - bin/bash
+          - -c
+          - touch ./log.log
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: config
+          mountPath: /scripts/test.sh
+          subPath: test.sh
+      volumes:
+      - name: config
+        configMap:
+          name: test-configmap
+        
+
+        
